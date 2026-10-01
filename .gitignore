@@ -1,0 +1,7 @@
+# data/ — SQLite 数据库与 WAL 文件（运行时生成，勿提交）
+*.db
+*.db-wal
+*.db-shm
+node_modules/
+*.log
+.DS_Store

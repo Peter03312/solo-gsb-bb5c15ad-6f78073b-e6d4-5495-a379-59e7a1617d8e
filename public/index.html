@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩绘玻璃拼片台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🪟 彩绘玻璃拼片台</h1>
+  <div id="projectTabs" class="tabs"></div>
+  <button id="newProjectBtn" class="small">＋ 新建窗框</button>
+</header>
+
+<main>
+  <section id="welcome" class="panel">
+    <h2>开始一个新窗框</h2>
+    <p>输入矩形窗框的正整数毫米尺寸，系统按 1:1 整数毫米坐标绘制玻璃拼片。</p>
+    <div class="form-row">
+      <label>名称 <input id="npName" type="text" value="正厅东窗" maxlength="100"></label>
+      <label>宽 (mm) <input id="npWidth" type="number" min="1" step="1" value="600"></label>
+      <label>高 (mm) <input id="npHeight" type="number" min="1" step="1" value="400"></label>
+      <button id="npCreate">创建窗框</button>
+    </div>
+    <div id="projectList"></div>
+  </section>
+
+  <section id="workspace" class="hidden">
+    <div class="toolbar">
+      <div class="proj-info">
+        <b id="projName"></b>
+        <span id="projSize" class="muted"></span>
+      </div>
+      <div class="tools">
+        <label><input type="checkbox" id="snapGrid" checked> 整数网格吸附</label>
+        <label><input type="checkbox" id="showGaps" checked> 显示缺口</label>
+        <label>颜色 <input type="color" id="pieceColor" value="#2980b9"></label>
+        <button id="addModeBtn" class="primary">✎ 绘制新片</button>
+        <button id="finishBtn" class="hidden primary">✓ 完成该片</button>
+        <button id="undoBtn" class="hidden">撤销一点</button>
+        <button id="cancelBtn" class="hidden">取消绘制</button>
+        <button id="publishBtn">🔒 发布图纸</button>
+        <button id="backBtn" class="small">← 项目列表</button>
+      </div>
+    </div>
+
+    <div id="errorBanner" class="banner hidden"></div>
+
+    <div class="canvas-wrap">
+      <canvas id="canvas"></canvas>
+      <div id="coords" class="coords"></div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="tabs2">
+        <button data-tab="draft" class="active">草稿拼片</button>
+        <button data-tab="pubs">历史发布</button>
+      </div>
+      <div id="draftPane">
+        <div id="pieceList"></div>
+        <div id="draftStats" class="muted"></div>
+      </div>
+      <div id="pubsPane" class="hidden">
+        <div id="pubList"></div>
+      </div>
+      <div id="pubView" class="hidden">
+        <button id="pubViewBack" class="small">← 返回草稿</button>
+        <h3 id="pubTitle"></h3>
+        <div class="legend-hint">发布版只读，后续编辑与清单重算只作用于草稿。</div>
+        <h4>各片面积与颜色</h4>
+        <table id="pubPieces"></table>
+        <h4>铅条下料清单</h4>
+        <div id="pubCame"></div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

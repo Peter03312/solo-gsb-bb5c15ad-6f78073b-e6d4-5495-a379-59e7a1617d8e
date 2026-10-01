@@ -1,0 +1,15 @@
+services:
+  glass-bench:
+    build: .
+    image: stained-glass-bench:latest
+    container_name: stained-glass-bench
+    ports:
+      # 宿主机端口:容器端口。宿主机端口可用环境变量 BENCH_PORT 覆盖。
+      - "${BENCH_PORT:-3000}:3000"
+    environment:
+      # SQLite 数据库文件位置（容器内）；首次启动自动建表初始化
+      DB_PATH: /home/node/app/data/glass.db
+    volumes:
+      # 数据库持久化到宿主机 ./data，容器重建不丢数据
+      - ./data:/home/node/app/data
+    restart: unless-stopped
